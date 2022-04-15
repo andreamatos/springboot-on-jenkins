@@ -9,13 +9,9 @@
         <module name="tasks-backend" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="starbucks-api" target="11" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="starbucks-api" options="-parameters" />
       <module name="tasks-backend" options="-parameters" />
     </option>
   </component>

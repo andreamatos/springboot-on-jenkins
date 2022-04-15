@@ -1,13 +1,15 @@
 package br.ce.wcaquino.taskbackend.model;
 
-import java.time.LocalDate;
+import lombok.AllArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.time.LocalDate;
 
 @Entity
+@AllArgsConstructor
 public class Task {
 
 	private Long id;
