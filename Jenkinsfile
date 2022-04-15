@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Just Test'){
             steps{
-                shell 'echo deu certo'
+                echo 'deu certo'
             }
         }
     }
