@@ -1,5 +1,7 @@
 # springboot-on-jenkins
 
+## Passo a passo para utilizar jenkins com sonar e quality gate
+
 ```
 executando postgress manualmente:
 docker run --name pg-tasks -e POSTGRES_DB=tasks -e POSTGRES_PASSWORD=password -p 5433:5432 postgres:9.6
