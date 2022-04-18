@@ -4,8 +4,9 @@
 
 ```
 executando postgress manualmente:
-docker run --name pg-tasks -e POSTGRES_DB=tasks -e POSTGRES_PASSWORD=password -p 5433:5432 postgres:9.6
--------------------------------------------------------------------------------------------------------------------
+docker run --name pg-tasks -e POSTGRES_DB=tasks -e POSTGRES_PASSWORD=password 
+-p 5433:5432 postgres:9.6
+--------------------------------------------------------------------------------------------------
 executando postgres e sonar com docker-compose para utilizar no pipeline
 criar o docker-compose.yml;
 
@@ -51,7 +52,7 @@ criar o docker-compose.yml;
 			
 executar o comando docker-compose up
 se houver problema com a memória executar: sudo sysctl -w vm.max_map_count=262144
--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 instalando jenkins;
 wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
@@ -66,7 +67,7 @@ abrindo firewall
 sudo ufw enable
 sudo ufw allow 8080
 
--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 logando jenkins
 http://172.19.0.1:8080/login?from=%2F
 
@@ -80,7 +81,7 @@ Senha: 123456
 Nome completo: André Amorim de Matos
 Email: amatos497@gmail.com
 
--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 Instance Configuration
 
 http://172.19.0.1:8080/
@@ -92,10 +93,10 @@ http://172.19.0.1:8080/
 	MAVEN -> pode escolher o maven da maquina ou
 		instalar a ultima versão sugerida pelo
 		Jenkins.
--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 Criando o Pipeline
 jenkins -> novo job -> escolher pipeline e incluir o nome do job -> tasks-backend -> OK
--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 Jenkins X JenkinsFile
 
 Em configuraçoes; 
@@ -110,7 +111,7 @@ Branch Specifier (blank for 'any')
 Script Path -> Jenkinsfile 
 
 Salvar
--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 Testando se a construçao do jenkins esta correta;
 
 incluir no Jenkinsfile;
@@ -127,7 +128,7 @@ pipeline{
 
 GIT: commit -> push
 Jenkins: Contruir Agora e verificar no log a mensagem 'deu certo'
--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 Criando Jenkinsfile para execuçao do projeto backend;
 
 JenkinsFile;
@@ -147,7 +148,7 @@ pipeline{
         }
     }
 }
--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 - Incluindo Sonar na esteira;
 -> instalar plugin do sonar na opçao -> Gerenciar Jenkins -> Gerenciar Plugins
 
@@ -174,12 +175,13 @@ no Jenkns entrar em;
 	Dashboard -> Credentials -> System Global credentials (unrestricted);
 	Kind - Secret Text
 	Scope - Global(Jenkins, nodes, items, all child items, etc)
-	Secret(gerar no sonar http://localhost:9000/account/security/ -> escrever jenkins, copiar e colar o token aqui)
+	Secret(gerar no sonar http://localhost:9000/account/security/ -> escrever jenkins, copiar 
+	e colar o token aqui)
 	ID: SonarToken
 	Description: Token Sonar
 
 apos acriacao da credencial;
 Dashboard -> configuração;
 - SonarQube servers e em Server authentication token adicionar o token que criamos e salvar.
--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 ```
