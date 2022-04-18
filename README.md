@@ -88,10 +88,10 @@ http://172.19.0.1:8080/
 -> Logar no Jenkins
 -> Manage Jenkins -> Global Tool Configuration;
 	JDK -> name: JAVA_LOCAL
-				 url: informar o java da maquina.
+		 url: informar o java da maquina.
 	MAVEN -> pode escolher o maven da maquina ou
-						instalar a ultima versão sugerida pelo
-						Jenkins.
+		instalar a ultima versão sugerida pelo
+		Jenkins.
 -------------------------------------------------------------------------------------------------------------------
 Criando o Pipeline
 jenkins -> novo job -> escolher pipeline e incluir o nome do job -> tasks-backend -> OK
@@ -159,7 +159,8 @@ no Jenkinsfile incluir o step correspondente ao sonar;
                 scannerHome = tool 'SONAR_SCANNER'
             }
             steps{
-                    sh "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://localhost:9000 
+                    sh "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack 
+		    -Dsonar.host.url=http://localhost:9000 
 		    -Dsonar.login=admin 
 		    -Dsonar.password=admin -Dsonar.java.binaries=target 
 		    -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.java"
