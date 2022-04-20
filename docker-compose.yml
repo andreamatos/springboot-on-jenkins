@@ -1,71 +1,51 @@
-  version: "3"
-  services:
-    pg-tasks:
-      container_name: pg-tasks
-      image: postgres:9.6
-      ports:
-        - 5433:5432
-      environment:
-        - POSTGRES_DB=tasks
-        - POSTGRES_PASSWORD=password
+version: "3"
+services:
+  pg-tasks:
+    container_name: pg-tasks
+    image: postgres:9.6
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_DB=tasks
+      - POSTGRES_PASSWORD=password
 
-    backend:
-      container_name: backend-prod
-      image: back_prod:build_${BUILD_NUMBER}
-      build:
-        context: .
-        args:
-          - WAR_FILE=target/tasks-backend.war
-          - CONTEXT=tasks-backend
-      networks:
-        - prod_net_back
-      ports:
-        - 9998:8080
-      environment:
-        - DATABASE_HOST=db
-        - DATABASE_PORT=5432
-        - DATABASE_USER=postgres
-        - DATABASE_PASSWD=passwd
-        #- DATABASE_UPDATE=none
-      depends_on:
-        - db
+  sonarqube:
+    container_name: sonar
+    image: sonarqube:7.9.2-community
+    ports:
+      - "9000:9000"
+    networks:
+      - sonarnet
+    environment:
+      - sonar.jdbc.url=jdbc:postgresql://pg-sonar:5432/sonar
+    depends_on:
+      - pg-sonar
+    volumes:
+      - sonarqube_conf:/opt/sonarqube/conf
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
 
-    sonarqube:
-      container_name: sonar
-      image: sonarqube:7.9.2-community
-      ports:
-        - "9000:9000"
-      networks:
-        - sonarnet
-      environment:
-        - sonar.jdbc.url=jdbc:postgresql://pg-sonar:5432/sonar
-      depends_on:
-        - pg-sonar
-      volumes:
-        - sonarqube_conf:/opt/sonarqube/conf
-        - sonarqube_data:/opt/sonarqube/data
-        - sonarqube_extensions:/opt/sonarqube/extensions
-        - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+  pg-sonar:
+    container_name: pg-sonar
+    image: postgres:9.6
+    networks:
+      - sonarnet
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+    volumes:
+      - postgresql:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
 
-    pg-sonar:
-      container_name: pg-sonar
-      image: postgres:9.6
-      networks:
-        - sonarnet
-      environment:
-        - POSTGRES_USER=sonar
-        - POSTGRES_PASSWORD=sonar
-      volumes:
-        - postgresql:/var/lib/postgresql
-        - postgresql_data:/var/lib/postgresql/data
+networks:
+  sonarnet:
+  seleniumGrid:
 
-  networks:
-    sonarnet:
-
-  volumes:
-    sonarqube_conf:
-    sonarqube_data:
-    sonarqube_extensions:
-    sonarqube_bundled-plugins:
-    postgresql:
-    postgresql_data:
+volumes:
+  sonarqube_conf:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_bundled-plugins:
+  postgresql:
+  postgresql_data:
