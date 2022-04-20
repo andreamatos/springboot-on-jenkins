@@ -20,22 +20,6 @@ services:
     volumes:
       - postgresql:/var/lib/postgresql
       - postgresql_data:/var/lib/postgresql/data
-
-  backend:
-    container_name: backend-prod
-    image: back_prod:build_${BUILD_NUMBER}
-    build:
-      context: .
-      args:
-        - WAR_FILE=target/tasks-backend.war
-        - CONTEXT=tasks-backend
-    ports:
-      - 9998:8080
-    environment:
-      - DATABASE_HOST=db
-      - DATABASE_PORT=5432
-      - DATABASE_USER=postgres
-      - DATABASE_PASSWD=passwd
     depends_on:
       - pg-tasks
 
@@ -55,6 +39,24 @@ services:
       - sonarqube_data:/opt/sonarqube/data
       - sonarqube_extensions:/opt/sonarqube/extensions
       - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+
+  backend:
+    container_name: backend-prod
+    image: back_prod:build_${BUILD_NUMBER}
+    build:
+      context: .
+      args:
+        - WAR_FILE=target/tasks-backend.war
+        - CONTEXT=tasks-backend
+    ports:
+      - 9998:8080
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWD=passwd
+    depends_on:
+      - sonarqube
 
 networks:
   sonarnet:
