@@ -173,5 +173,13 @@ apos acriacao da credencial;
 Dashboard -> configuração;
 - SonarQube servers e em Server authentication token adicionar o token que criamos e salvar.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Enviando codigo para o analise do sonar;
+Incluindo Quality Gate;
 
+        stage('Quality Gate'){
+            steps{
+                sleep(5)
+                timeout(time: 1, unit: 'MINUTES'){
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
