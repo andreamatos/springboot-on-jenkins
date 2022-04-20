@@ -64,6 +64,7 @@
 
   networks:
     prod_net_back:
+    sonarnet:
 
   volumes:
     prod_postgresql:
