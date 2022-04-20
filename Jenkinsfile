@@ -21,19 +21,21 @@ pipeline{
                 }
             }
         }
-        stage('Quality Gate'){
-            steps{
+        stage ('Quality Gate') {
+            steps {
                 sleep(5)
-                timeout(time: 1, unit: 'MINUTES'){
+                timeout(time: 1, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
             }
         }
-        stage('Deploy Prod'){
-            steps{
+
+        stage('Deploy Prod') {
+            steps {
                 sh 'docker-compose build'
-                sh 'docker-compose up'
+                sh 'docker-compose up -d'
             }
         }
+
     }
 }
