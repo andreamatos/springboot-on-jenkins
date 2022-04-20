@@ -38,9 +38,27 @@ services:
       - postgresql:/var/lib/postgresql
       - postgresql_data:/var/lib/postgresql/data
 
+
+  backend:
+    container_name: backend-prod
+    image: back_prod:build_${BUILD_NUMBER}
+    build:
+      context: .
+      args:
+        - WAR_FILE=target/tasks-backend.war
+        - CONTEXT=tasks-backend
+    ports:
+      - 9998:8080
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWD=passwd
+    depends_on:
+      - db
+
 networks:
   sonarnet:
-  seleniumGrid:
 
 volumes:
   sonarqube_conf:
