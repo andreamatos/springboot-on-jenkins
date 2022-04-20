@@ -1,16 +1,13 @@
   version: "3"
   services:
-    db:
-      container_name: pg-prod
+    pg-tasks:
+      container_name: pg-tasks
       image: postgres:9.6
-      networks:
-        - prod_net_back
+      ports:
+        - 5433:5432
       environment:
-        - POSTGRES_PASSWORD=passwd
         - POSTGRES_DB=tasks
-      volumes:
-        - prod_postgresql:/var/lib/postgresql
-        - prod_postgresql_data:/var/lib/postgresql/data
+        - POSTGRES_PASSWORD=password
 
     backend:
       container_name: backend-prod
@@ -59,17 +56,16 @@
         - POSTGRES_USER=sonar
         - POSTGRES_PASSWORD=sonar
       volumes:
-        - prod_postgresql:/var/lib/postgresql
-        - prod_postgresql_data:/var/lib/postgresql/data
+        - postgresql:/var/lib/postgresql
+        - postgresql_data:/var/lib/postgresql/data
 
   networks:
-    prod_net_back:
     sonarnet:
 
   volumes:
-    prod_postgresql:
-    prod_postgresql_data:
     sonarqube_conf:
     sonarqube_data:
     sonarqube_extensions:
     sonarqube_bundled-plugins:
+    postgresql:
+    postgresql_data:
