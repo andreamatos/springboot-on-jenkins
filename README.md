@@ -280,13 +280,13 @@ services:
 networks:
   sonarnet:
 ---------------------------------------------------------------------  
- docker file da raiz do projeto;
+docker file da raiz do projeto;
  
- FROM tomcat:9.0-jdk8-openjdk
+FROM tomcat:9.0-jdk8-openjdk
 ARG WAR_FILE
 ARG CONTEXT
 COPY ${WAR_FILE} /usr/local/tomcat/webapps/${CONTEXT}.war
-
+---------------------------------------------------------------------
 o arquivo Jenkinsfile contera o step;
 
         stage('Deploy Prod') {
