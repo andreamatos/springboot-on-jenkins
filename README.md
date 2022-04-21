@@ -192,8 +192,11 @@ Incluindo Quality Gate;
             }
         }
 --------------------------------------------------------------------- 
-Deploy em imagem;
+```
 
+## Deploy da aplicaçao em uma imagem tomcat.
+
+```
 Para funcionar o projeto se conecta `a uma imagem do postgress, criar uma pasta src/devops e criar o seguinte
 docker-compose;
 
@@ -313,7 +316,6 @@ Efetuar o push no git e contruir o jenkis;
 
 acessar a aplicacao em http://localhost:9998/tasks-backend/
 ```
-
 ## Referência
 
 ```
