@@ -197,8 +197,8 @@ Incluindo Quality Gate;
 ## Deploy da aplicaçao na imagem do servidor TomCat.
 
 ```
-Para funcionar o projeto se conecta `a uma imagem do postgress, criar uma pasta src/devops e criar o seguinte
-docker-compose;
+Para funcionar o projeto se conecta `a uma imagem do postgress, criar uma pasta 
+src/devops e criar o seguinte docker-compose;
 
 docker-compose up
 
@@ -252,8 +252,10 @@ volumes:
   sonarqube_bundled-plugins:
   postgresql:
   postgresql_data:
-  
- o docker-compose que subira na esteira do jenkins contera a imagem da aplicaçao tasks-backend;
+---------------------------------------------------------------------  
+ o docker-compose que subira na esteira do jenkins contera a imagem da aplicaçao 
+ tasks-backend;
+ 
  version: "3"
 services:
   backend:
@@ -277,7 +279,7 @@ services:
 
 networks:
   sonarnet:
-  
+---------------------------------------------------------------------  
  docker file da raiz do projeto;
  
  FROM tomcat:9.0-jdk8-openjdk
@@ -293,7 +295,7 @@ o arquivo Jenkinsfile contera o step;
                 sh 'docker-compose up -d'
             }
         }
-		
+---------------------------------------------------------------------		
 alterar o application.properties para;
 
 server.port=8001
@@ -312,7 +314,8 @@ spring.jpa.hibernate.ddl-auto=${DATABASE_UPDATE:create}
 #spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults = false
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQL9Dialect
 
-Efetuar o push no git e contruir o jenkis;
+---------------------------------------------------------------------
+Efetuar o push no git e contruir o jenkis.
 
 acessar a aplicacao em http://localhost:9998/tasks-backend/
 ```
