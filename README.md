@@ -194,7 +194,7 @@ Incluindo Quality Gate;
 --------------------------------------------------------------------- 
 ```
 
-## Deploy da aplicaçao em uma imagem tomcat.
+## Deploy da aplicaçao na imagem do servidor TomCat.
 
 ```
 Para funcionar o projeto se conecta `a uma imagem do postgress, criar uma pasta src/devops e criar o seguinte
