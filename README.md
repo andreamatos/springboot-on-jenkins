@@ -312,3 +312,10 @@ spring.jpa.database-platform=org.hibernate.dialect.PostgreSQL9Dialect
 Efetuar o push no git e contruir o jenkis;
 
 acessar a aplicacao em http://localhost:9998/tasks-backend/
+```
+
+## Referência
+
+```
+https://www.udemy.com/course/integracao-continua-jenkins/
+```
